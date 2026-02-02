@@ -40,9 +40,10 @@
             color: var(--text-gray); 
             transition: color 0.3s; 
             padding: 10px 0;
-            font-family: var(--font-logo); 
-            font-size: 1.1rem; 
-            letter-spacing: 0.05em;
+            font-family: var(--font-main); /* Normal Font */
+            font-size: 1rem; 
+            letter-spacing: 0.02em;
+            font-weight: 500;
         }
         .dropdown-trigger:hover { color: var(--text); }
         
@@ -95,10 +96,10 @@
         h1 { font-family: var(--font-main); font-weight: 700; font-size: 4rem; margin: 0 0 1.5rem 0; letter-spacing: -0.04em; line-height: 1.2; padding-bottom: 0.1em; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .btn { font-family: var(--font-main); background: var(--text); color: black; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 700; transition: all 0.2s; cursor: pointer; display: inline-block; }
 
-        /* --- NEW TIMELINE SECTION --- */
+        /* --- TIMELINE SECTION --- */
         #timeline {
             position: relative;
-            padding: 6rem 2rem;
+            padding: 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
             z-index: 2;
@@ -119,14 +120,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 8rem; /* Spacing between stages */
-            opacity: 0.2; /* Default dimmed state */
-            transform: translateY(20px);
+            margin-bottom: 3rem; /* Compact spacing */
+            opacity: 0.2; 
+            transform: translateY(10px);
             transition: all 0.6s ease-out;
             position: relative;
         }
 
-        /* Active State (Highlighted) */
         .timeline-stage.active {
             opacity: 1;
             transform: translateY(0);
@@ -139,22 +139,18 @@
         }
 
         .stage-content {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 1rem;
             width: 45%;
             text-align: right;
             position: relative;
         }
         
-        /* Alternating Layout */
         .timeline-stage:nth-child(even) { flex-direction: row-reverse; }
         .timeline-stage:nth-child(even) .stage-content { text-align: left; }
 
         .stage-marker {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: var(--bg);
             border: 2px solid var(--text-gray);
             border-radius: 50%;
@@ -164,19 +160,12 @@
         }
 
         .stage-title {
-            font-family: var(--font-logo); /* BPdots */
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
+            font-family: var(--font-main); /* Normal Font */
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: 0.02em;
         }
-
-        .stage-desc {
-            font-size: 1rem;
-            color: var(--text-gray);
-            line-height: 1.5;
-        }
-
 
         /* Services Grid Section */
         .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
@@ -186,7 +175,7 @@
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
         .card h3 { 
-            font-family: var(--font-logo); 
+            font-family: var(--font-logo); /* Subheadings in BPdots */
             margin-top: 0; 
             font-size: 1.5rem; 
             color: var(--text); 
@@ -209,7 +198,7 @@
             .timeline-line { left: 20px; }
             .timeline-stage { flex-direction: column !important; align-items: flex-start; margin-left: 20px; }
             .stage-marker { position: absolute; left: -8px; margin: 0; top: 20px; }
-            .stage-content { width: 100%; text-align: left !important; margin-left: 20px; margin-top: -10px; width: calc(100% - 40px); }
+            .stage-content { text-align: left !important; margin-left: 20px; width: calc(100% - 40px); }
         }
     </style>
 </head>
@@ -241,139 +230,94 @@
     <div class="timeline-line"></div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 01</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 01</div></div>
         <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div> </div>
+        <div class="stage-spacer" style="width: 45%;"></div> 
+    </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 02</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 02</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 03</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 03</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 04</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 04</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 05</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 05</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 06</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 06</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 07</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 07</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 08</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 08</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 09</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 09</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 10</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 10</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 11</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 11</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 12</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 12</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 13</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 13</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 14</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 14</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
 
     <div class="timeline-stage">
-        <div class="stage-content">
-            <div class="stage-title">Stage 15</div>
-            <div class="stage-desc">Placeholder description for this stage of the process.</div>
-        </div>
+        <div class="stage-content"><div class="stage-title">Stage 15</div></div>
         <div class="stage-marker"></div>
         <div class="stage-spacer" style="width: 45%;"></div>
     </div>
-
 </section>
 
 <section id="services" class="section">
@@ -486,7 +430,7 @@
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5 // Trigger when 50% of the item is visible
+        threshold: 0.5 
     };
 
     const observer = new IntersectionObserver((entries) => {
