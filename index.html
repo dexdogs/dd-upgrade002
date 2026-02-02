@@ -109,7 +109,8 @@
         .timeline-line {
             position: absolute;
             left: 50%;
-            top: 0;
+            /* CHANGE 1: Negative top value extends the line up into the hero section */
+            top: -100px; 
             bottom: 0;
             width: 2px;
             background: rgba(255,255,255,0.05);
@@ -169,6 +170,31 @@
             letter-spacing: 0.01em;
         }
 
+        /* Services Link Style */
+        .timeline-end {
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-end a {
+            font-family: var(--font-main);
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            background: var(--surface);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .timeline-end a:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
         /* Services Grid Section */
         .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
@@ -192,7 +218,11 @@
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            /* Removed left-align overrides. Timeline will now center automatically. */
+            /* Center alignment for mobile */
+            .timeline-line { left: 50%; transform: translateX(-50%); }
+            .stage-marker { left: 50%; transform: translateX(-50%); }
+            /* Ensure line connects on mobile too */
+            .timeline-line { top: -80px; } 
         }
     </style>
 </head>
@@ -237,6 +267,10 @@
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 13</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 14</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 15</div></div><div class="stage-marker"></div></div>
+    
+    <div class="timeline-end">
+        <a href="#services">Services &darr;</a>
+    </div>
 </section>
 
 <section id="services" class="section">
