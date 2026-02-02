@@ -106,15 +106,33 @@
         
         #stage1 { scroll-margin-top: 150px; }
 
+        /* New Header for the Dog Logo */
+        .timeline-header {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 120px; /* Fixed height to control line start */
+            margin-bottom: 0;
+            position: relative;
+            z-index: 5; /* Sit above the line */
+        }
+
+        .timeline-header img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
         .timeline-line {
             position: absolute;
             left: 50%;
-            top: 0;
+            /* Start line slightly inside the logo area to ensure connection */
+            top: 110px; 
             bottom: 0;
             width: 2px;
             background: rgba(255,255,255,0.05);
             transform: translateX(-50%);
-            z-index: -1;
+            z-index: -1; /* Line sits behind the logo */
         }
 
         .timeline-stage {
@@ -130,7 +148,6 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
-        /* Alternating Layout - Works on both Mobile and Desktop now */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
@@ -192,7 +209,9 @@
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            /* Removed left-align overrides. Timeline will now center automatically. */
+            /* Center alignment for mobile */
+            .timeline-line { left: 50%; transform: translateX(-50%); }
+            .stage-marker { left: 50%; transform: translateX(-50%); }
         }
     </style>
 </head>
@@ -221,7 +240,12 @@
 </section>
 
 <section id="timeline">
+    <div class="timeline-header">
+        <img src="ulogo.png" alt="timeline start logo">
+    </div>
+    
     <div class="timeline-line"></div>
+    
     <div class="timeline-stage" id="stage1"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 02</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 03</div></div><div class="stage-marker"></div></div>
