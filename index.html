@@ -98,14 +98,12 @@
         /* --- TIMELINE SECTION --- */
         #timeline {
             position: relative;
-            /* FIX 2: Reduced top padding to 0 to minimize gap */
             padding: 0 2rem 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
             z-index: 2;
         }
         
-        /* FIX 3: Scroll Margin for Stage 1 so it clears the navbar */
         #stage1 { scroll-margin-top: 150px; }
 
         .timeline-line {
@@ -132,6 +130,7 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
+        /* Alternating Layout - Works on both Mobile and Desktop now */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
@@ -156,7 +155,6 @@
             transition: all 0.3s;
         }
 
-        /* FIX 1: Active Stage Marker is now WHITE */
         .timeline-stage.active .stage-marker {
             background: #ffffff;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
@@ -186,7 +184,6 @@
         @media (max-width: 768px) { 
             .hero { height: 80vh; padding-top: 60px; } 
             
-            /* Reduced top padding on mobile too */
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             #timeline { padding: 0 1rem 4rem 1rem; }
             
@@ -195,10 +192,7 @@
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            .timeline-line { left: 20px; transform: none; }
-            .stage-marker { left: 20px; transform: translateX(-50%); }
-            .timeline-stage { justify-content: flex-start !important; margin-left: 0; }
-            .stage-content { width: calc(100% - 60px) !important; text-align: left !important; margin-left: 45px; }
+            /* Removed left-align overrides. Timeline will now center automatically. */
         }
     </style>
 </head>
