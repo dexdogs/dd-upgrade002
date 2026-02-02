@@ -40,9 +40,8 @@
             color: var(--text-gray); 
             transition: color 0.3s; 
             padding: 10px 0;
-            font-family: var(--font-main); /* Normal Font */
+            font-family: var(--font-main); /* Corrected to normal font */
             font-size: 1rem; 
-            letter-spacing: 0.02em;
             font-weight: 500;
         }
         .dropdown-trigger:hover { color: var(--text); }
@@ -96,7 +95,7 @@
         h1 { font-family: var(--font-main); font-weight: 700; font-size: 4rem; margin: 0 0 1.5rem 0; letter-spacing: -0.04em; line-height: 1.2; padding-bottom: 0.1em; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .btn { font-family: var(--font-main); background: var(--text); color: black; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 700; transition: all 0.2s; cursor: pointer; display: inline-block; }
 
-        /* --- TIMELINE SECTION --- */
+        /* --- CORRECTED TIMELINE SECTION --- */
         #timeline {
             position: relative;
             padding: 4rem 2rem;
@@ -117,54 +116,54 @@
         }
 
         .timeline-stage {
+            position: relative;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-bottom: 3rem; /* Compact spacing */
+            margin-bottom: 2.5rem; /* Compact spacing */
             opacity: 0.2; 
             transform: translateY(10px);
             transition: all 0.6s ease-out;
-            position: relative;
+            width: 100%;
         }
 
-        .timeline-stage.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
-        .timeline-stage.active .stage-marker {
-            background: var(--accent);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-            border-color: var(--accent);
-        }
+        .timeline-stage:nth-child(odd) { justify-content: flex-start; }
+        .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
         .stage-content {
-            padding: 1rem;
-            width: 45%;
-            text-align: right;
+            width: calc(50% - 30px);
             position: relative;
         }
         
-        .timeline-stage:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-stage:nth-child(odd) .stage-content { text-align: right; }
         .timeline-stage:nth-child(even) .stage-content { text-align: left; }
 
         .stage-marker {
-            width: 14px;
-            height: 14px;
+            position: absolute;
+            left: 50%; /* Puts marker directly on the center line */
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
             background: var(--bg);
             border: 2px solid var(--text-gray);
             border-radius: 50%;
-            margin: 0 2rem;
             z-index: 2;
             transition: all 0.3s;
         }
 
+        .timeline-stage.active .stage-marker {
+            background: var(--accent);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            border-color: var(--accent);
+        }
+
         .stage-title {
-            font-family: var(--font-main); /* Normal Font */
-            font-size: 1.2rem;
+            font-family: var(--font-main); /* Corrected to normal font */
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--text);
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
 
         /* Services Grid Section */
@@ -173,15 +172,7 @@
         
         .card { background: var(--surface); padding: 3rem 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, border-color 0.3s; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        
-        .card h3 { 
-            font-family: var(--font-logo); /* Subheadings in BPdots */
-            margin-top: 0; 
-            font-size: 1.5rem; 
-            color: var(--text); 
-            letter-spacing: 0.05em; 
-        }
-        
+        .card h3 { font-family: var(--font-logo); margin-top: 0; font-size: 1.5rem; color: var(--text); letter-spacing: 0.05em; }
         .card p { color: var(--text-gray); line-height: 1.7; font-size: 1rem; font-weight: 300; }
 
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
@@ -193,12 +184,10 @@
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
-
-            /* Timeline Mobile Fixes */
-            .timeline-line { left: 20px; }
-            .timeline-stage { flex-direction: column !important; align-items: flex-start; margin-left: 20px; }
-            .stage-marker { position: absolute; left: -8px; margin: 0; top: 20px; }
-            .stage-content { text-align: left !important; margin-left: 20px; width: calc(100% - 40px); }
+            .timeline-line { left: 20px; transform: none; }
+            .stage-marker { left: 20px; transform: translateX(-50%); }
+            .timeline-stage { justify-content: flex-start !important; margin-left: 0; }
+            .stage-content { width: calc(100% - 60px) !important; text-align: left !important; margin-left: 45px; }
         }
     </style>
 </head>
@@ -228,96 +217,21 @@
 
 <section id="timeline">
     <div class="timeline-line"></div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 01</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div> 
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 02</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 03</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 04</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 05</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 06</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 07</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 08</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 09</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 10</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 11</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 12</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 13</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 14</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
-
-    <div class="timeline-stage">
-        <div class="stage-content"><div class="stage-title">Stage 15</div></div>
-        <div class="stage-marker"></div>
-        <div class="stage-spacer" style="width: 45%;"></div>
-    </div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 02</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 03</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 04</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 05</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 06</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 07</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 08</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 09</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 10</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 11</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 12</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 13</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 14</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 15</div></div><div class="stage-marker"></div></div>
 </section>
 
 <section id="services" class="section">
@@ -342,7 +256,6 @@
 </footer>
 
 <script>
-    /* GLOBE SCRIPT */
     const canvas = document.getElementById('globe-canvas');
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
@@ -350,21 +263,16 @@
     const globeRadius = isMobile ? 160 : 260; 
     const particleCount = isMobile ? 350 : 750; 
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
-    
     const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
 
     function resize() {
         const dpr = window.devicePixelRatio || 1;
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        width = window.innerWidth; height = window.innerHeight;
+        canvas.width = width * dpr; canvas.height = height * dpr;
+        canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resize); resize();
 
     for (let i = 0; i < particleCount; i++) {
         const phi = Math.acos(-1 + (2 * i) / particleCount);
@@ -380,20 +288,16 @@
     function handleStart(x, y) { isDragging = true; lastMouse = { x, y }; }
     function handleMove(x, y) {
         if (!isDragging) return;
-        const dx = x - lastMouse.x;
-        const dy = y - lastMouse.y;
-        targetRotation.y += dx * 0.005;
-        targetRotation.x -= dy * 0.005;
+        targetRotation.y += (x - lastMouse.x) * 0.005;
+        targetRotation.x -= (y - lastMouse.y) * 0.005;
         lastMouse = { x, y };
     }
-    function handleEnd() { isDragging = false; }
-
     canvas.addEventListener('mousedown', e => handleStart(e.clientX, e.clientY));
     window.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
-    window.addEventListener('mouseup', handleEnd);
+    window.addEventListener('mouseup', () => isDragging = false);
     canvas.addEventListener('touchstart', e => handleStart(e.touches[0].clientX, e.touches[0].clientY), {passive: false});
     window.addEventListener('touchmove', e => { if(isDragging) e.preventDefault(); handleMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive: false});
-    window.addEventListener('touchend', handleEnd);
+    window.addEventListener('touchend', () => isDragging = false);
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
@@ -410,8 +314,8 @@
             renderList.push({ x: x1, y: y2, z: z2, char: p.char });
         });
         renderList.sort((a, b) => a.z - b.z);
-        const cx = width / 2, cy = height / 2;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const cx = width / 2, cy = height / 2;
         renderList.forEach(p => {
             const scale = 350 / (350 + p.z); 
             const px = cx + p.x * scale, py = cy + p.y * scale;
@@ -426,26 +330,13 @@
     }
     animate();
 
-    /* --- TIMELINE OBSERVER SCRIPT --- */
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5 
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
+            else entry.target.classList.remove('active');
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.timeline-stage').forEach(stage => {
-        observer.observe(stage);
-    });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.timeline-stage').forEach(stage => observer.observe(stage));
 </script>
 
 </body>
