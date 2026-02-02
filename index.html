@@ -98,15 +98,19 @@
         /* --- TIMELINE SECTION --- */
         #timeline {
             position: relative;
-            padding: 4rem 2rem;
+            /* FIX 2: Reduced top padding to 0 to minimize gap */
+            padding: 0 2rem 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
             z-index: 2;
         }
+        
+        /* FIX 3: Scroll Margin for Stage 1 so it clears the navbar */
+        #stage1 { scroll-margin-top: 150px; }
 
         .timeline-line {
             position: absolute;
-            left: 50%; /* Center line for both desktop and mobile */
+            left: 50%;
             top: 0;
             bottom: 0;
             width: 2px;
@@ -128,12 +132,11 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
-        /* Alternating Layout for Desktop & Mobile */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
         .stage-content {
-            width: calc(50% - 30px); /* Sits to the side of the center line */
+            width: calc(50% - 30px);
             position: relative;
         }
         
@@ -153,10 +156,11 @@
             transition: all 0.3s;
         }
 
+        /* FIX 1: Active Stage Marker is now WHITE */
         .timeline-stage.active .stage-marker {
-            background: var(--accent);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
-            border-color: var(--accent);
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            border-color: #ffffff;
         }
 
         .stage-title {
@@ -181,16 +185,20 @@
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
             .hero { height: 80vh; padding-top: 60px; } 
+            
+            /* Reduced top padding on mobile too */
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
+            #timeline { padding: 0 1rem 4rem 1rem; }
+            
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            /* Timeline Tweaks for Mobile (Maintains Center Alignment) */
-            /* We slightly reduce the gap so text fits on small screens */
-            .stage-content { width: 42%; } 
-            #timeline { padding: 4rem 1rem; }
+            .timeline-line { left: 20px; transform: none; }
+            .stage-marker { left: 20px; transform: translateX(-50%); }
+            .timeline-stage { justify-content: flex-start !important; margin-left: 0; }
+            .stage-content { width: calc(100% - 60px) !important; text-align: left !important; margin-left: 45px; }
         }
     </style>
 </head>
@@ -214,13 +222,13 @@
     <canvas id="globe-canvas"></canvas>
     <div class="hero-content">
         <h1>your environmental<br>index watchdogs.</h1>
-        <a href="#timeline" class="btn">how?</a>
+        <a href="#stage1" class="btn">how?</a>
     </div>
 </section>
 
 <section id="timeline">
     <div class="timeline-line"></div>
-    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage" id="stage1"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 02</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 03</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 04</div></div><div class="stage-marker"></div></div>
