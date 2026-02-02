@@ -40,7 +40,7 @@
             color: var(--text-gray); 
             transition: color 0.3s; 
             padding: 10px 0;
-            font-family: var(--font-main); /* Corrected to normal font */
+            font-family: var(--font-main);
             font-size: 1rem; 
             font-weight: 500;
         }
@@ -95,7 +95,7 @@
         h1 { font-family: var(--font-main); font-weight: 700; font-size: 4rem; margin: 0 0 1.5rem 0; letter-spacing: -0.04em; line-height: 1.2; padding-bottom: 0.1em; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .btn { font-family: var(--font-main); background: var(--text); color: black; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 700; transition: all 0.2s; cursor: pointer; display: inline-block; }
 
-        /* --- CORRECTED TIMELINE SECTION --- */
+        /* --- TIMELINE SECTION --- */
         #timeline {
             position: relative;
             padding: 4rem 2rem;
@@ -106,7 +106,7 @@
 
         .timeline-line {
             position: absolute;
-            left: 50%;
+            left: 50%; /* Center line for both desktop and mobile */
             top: 0;
             bottom: 0;
             width: 2px;
@@ -119,7 +119,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            margin-bottom: 2.5rem; /* Compact spacing */
+            margin-bottom: 2.5rem; 
             opacity: 0.2; 
             transform: translateY(10px);
             transition: all 0.6s ease-out;
@@ -128,11 +128,12 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
+        /* Alternating Layout for Desktop & Mobile */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
         .stage-content {
-            width: calc(50% - 30px);
+            width: calc(50% - 30px); /* Sits to the side of the center line */
             position: relative;
         }
         
@@ -141,7 +142,7 @@
 
         .stage-marker {
             position: absolute;
-            left: 50%; /* Puts marker directly on the center line */
+            left: 50%; 
             transform: translateX(-50%);
             width: 12px;
             height: 12px;
@@ -159,7 +160,7 @@
         }
 
         .stage-title {
-            font-family: var(--font-main); /* Corrected to normal font */
+            font-family: var(--font-main);
             font-size: 1.1rem;
             font-weight: 500;
             color: var(--text);
@@ -177,6 +178,7 @@
 
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
+        /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
             .hero { height: 80vh; padding-top: 60px; } 
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
@@ -184,10 +186,11 @@
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
-            .timeline-line { left: 20px; transform: none; }
-            .stage-marker { left: 20px; transform: translateX(-50%); }
-            .timeline-stage { justify-content: flex-start !important; margin-left: 0; }
-            .stage-content { width: calc(100% - 60px) !important; text-align: left !important; margin-left: 45px; }
+            
+            /* Timeline Tweaks for Mobile (Maintains Center Alignment) */
+            /* We slightly reduce the gap so text fits on small screens */
+            .stage-content { width: 42%; } 
+            #timeline { padding: 4rem 1rem; }
         }
     </style>
 </head>
