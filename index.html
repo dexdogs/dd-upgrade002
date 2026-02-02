@@ -106,33 +106,36 @@
         
         #stage1 { scroll-margin-top: 150px; }
 
-        /* New Header for the Dog Logo */
+        /* HEADER: Holds the ulogo.png */
         .timeline-header {
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            height: 120px; /* Fixed height to control line start */
+            height: 120px; 
             margin-bottom: 0;
             position: relative;
-            z-index: 5; /* Sit above the line */
+            z-index: 5; 
         }
 
         .timeline-header img {
             height: 100%;
             width: auto;
-            display: block;
+            display: block; 
+            margin: 0;
+            padding: 0;
         }
 
+        /* VERTICAL LINE */
         .timeline-line {
             position: absolute;
             left: 50%;
-            /* Start line slightly inside the logo area to ensure connection */
+            /* OVERLAP FIX: Starts at 110px to tuck behind the 120px logo */
             top: 110px; 
             bottom: 0;
             width: 2px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.05); 
             transform: translateX(-50%);
-            z-index: -1; /* Line sits behind the logo */
+            z-index: -1; 
         }
 
         .timeline-stage {
@@ -148,6 +151,7 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
+        /* Alternating Layout */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
@@ -172,6 +176,7 @@
             transition: all 0.3s;
         }
 
+        /* Active Marker: WHITE */
         .timeline-stage.active .stage-marker {
             background: #ffffff;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
@@ -209,9 +214,11 @@
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            /* Center alignment for mobile */
+            /* Center alignment for mobile: Enforce inheritance of desktop styles */
             .timeline-line { left: 50%; transform: translateX(-50%); }
             .stage-marker { left: 50%; transform: translateX(-50%); }
+            .timeline-stage { justify-content: inherit; margin-left: 0; }
+            .stage-content { width: calc(50% - 30px); margin: 0; }
         }
     </style>
 </head>
