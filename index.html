@@ -106,32 +106,15 @@
         
         #stage1 { scroll-margin-top: 150px; }
 
-        .timeline-header {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 120px; 
-            margin-bottom: 0;
-            position: relative;
-            z-index: 10; 
-        }
-
-        .timeline-header img {
-            height: 100%;
-            width: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
         .timeline-line {
             position: absolute;
             left: 50%;
-            top: 100px; /* Overlap with logo header for seamless connection */
+            top: 0;
             bottom: 0;
             width: 2px;
             background: rgba(255,255,255,0.05);
             transform: translateX(-50%);
-            z-index: -1; 
+            z-index: -1;
         }
 
         .timeline-stage {
@@ -147,6 +130,7 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
+        /* Alternating Layout - Works on both Mobile and Desktop now */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
@@ -208,10 +192,7 @@
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
-            .timeline-line { left: 50%; transform: translateX(-50%); }
-            .stage-marker { left: 50%; transform: translateX(-50%); }
-            .timeline-stage { justify-content: inherit; margin-left: 0; }
-            .stage-content { width: calc(50% - 30px); margin: 0; }
+            /* Removed left-align overrides. Timeline will now center automatically. */
         }
     </style>
 </head>
@@ -240,12 +221,7 @@
 </section>
 
 <section id="timeline">
-    <div class="timeline-header">
-        <img src="ulogo.png" alt="timeline start logo">
-    </div>
-    
     <div class="timeline-line"></div>
-    
     <div class="timeline-stage" id="stage1"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 02</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 03</div></div><div class="stage-marker"></div></div>
@@ -343,6 +319,7 @@
             renderList.push({ x: x1, y: y2, z: z2, char: p.char });
         });
         renderList.sort((a, b) => a.z - b.z);
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         const cx = width / 2, cy = height / 2;
         renderList.forEach(p => {
             const scale = 350 / (350 + p.z); 
