@@ -75,8 +75,7 @@
         /* Hero Section */
         .hero { 
             position: relative; 
-            /* Fixed: Uses svh to prevent jumping when address bar hides */
-            height: 100svh; 
+            height: 100svh; /* Keeps globe stable on scroll */
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -105,7 +104,6 @@
             z-index: 2;
         }
         
-        /* Stage 1 moved up to meet the logo */
         #stage1 { 
             scroll-margin-top: 150px; 
             margin-top: -15px; 
@@ -131,9 +129,7 @@
         .timeline-line {
             position: absolute;
             left: 50%;
-            /* Starts at 125px (center of first dot) */
             top: 125px; 
-            /* Ends at 80px (before Services button) */
             bottom: 80px; 
             width: 4px; 
             background: #ffffff;
@@ -230,10 +226,10 @@
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
             .hero { 
-                /* Fixed: Uses 70svh to ensure globe is visible and stable */
                 height: 70svh; 
                 min-height: 500px; 
-                padding-top: 60px; 
+                /* Padding removed to ensure perfect vertical centering */
+                padding-top: 0; 
             } 
             
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
@@ -329,21 +325,20 @@
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
     const isMobile = window.innerWidth < 768;
-    const globeRadius = isMobile ? 160 : 260; 
+    
+    // UPDATED: Radius reduced to 135 to prevent bottom cutoff on mobile
+    const globeRadius = isMobile ? 135 : 260; 
+    
     const particleCount = isMobile ? 350 : 750; 
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
     const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
 
-    // FIXED: Start with 0 so the first resize ALWAYS runs
     let lastWidth = 0; 
 
     function resize() {
         const currentWidth = window.innerWidth;
-        
-        // Prevent redraw if width hasn't changed (stops mobile vertical scroll jump)
         if (currentWidth === lastWidth && isMobile) return;
-        
-        lastWidth = currentWidth; // Update for next time
+        lastWidth = currentWidth; 
 
         const dpr = window.devicePixelRatio || 1;
         width = window.innerWidth; height = window.innerHeight;
