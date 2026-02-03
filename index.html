@@ -75,7 +75,7 @@
         /* Hero Section */
         .hero { 
             position: relative; 
-            height: 100vh; 
+            height: 100svh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -226,7 +226,7 @@
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
         @media (max-width: 768px) { 
-            .hero { height: 70vh; padding-top: 60px; } 
+            .hero { height: 70svh; min-height: 500px; padding-top: 60px; } 
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             #timeline { padding: 0 1rem 4rem 1rem; }
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
@@ -310,7 +310,7 @@
 </section>
 
 <footer>
-    &copy; 2026 Dexdogs Consulting. Boston, MA.
+    &copy; 2026 dexdogs USA.
 </footer>
 
 <script>
@@ -323,7 +323,12 @@
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
     const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
 
+    let lastWidth = window.innerWidth;
+    
     function resize() {
+        if (window.innerWidth === lastWidth && isMobile) return;
+        lastWidth = window.innerWidth;
+        
         const dpr = window.devicePixelRatio || 1;
         width = window.innerWidth; height = window.innerHeight;
         canvas.width = width * dpr; canvas.height = height * dpr;
