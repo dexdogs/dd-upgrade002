@@ -106,16 +106,40 @@
         
         #stage1 { scroll-margin-top: 150px; }
 
+        /* HEADER: Holds the ulogo.png */
+        .timeline-header {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 120px; 
+            margin-bottom: 0;
+            position: relative;
+            z-index: 5; /* Image sits on top */
+        }
+
+        .timeline-header img {
+            height: 100%;
+            width: auto;
+            display: block; 
+            margin: 0;
+            padding: 0;
+        }
+
+        /* VERTICAL LINE */
         .timeline-line {
             position: absolute;
             left: 50%;
-            /* CHANGE 1: Negative top value extends the line up into the hero section */
-            top: -100px; 
+            /* START POINT: 110px. 
+               This tucks the line 10px behind the 120px logo for a seamless join. */
+            top: 110px; 
             bottom: 0;
-            width: 2px;
+            
+            /* THICKNESS INCREASE: Changed from 2px to 3px */
+            width: 3px; 
+            
             background: rgba(255,255,255,0.05);
             transform: translateX(-50%);
-            z-index: -1;
+            z-index: -1; 
         }
 
         .timeline-stage {
@@ -131,7 +155,7 @@
 
         .timeline-stage.active { opacity: 1; transform: translateY(0); }
 
-        /* Alternating Layout - Works on both Mobile and Desktop now */
+        /* Alternating Layout */
         .timeline-stage:nth-child(odd) { justify-content: flex-start; }
         .timeline-stage:nth-child(even) { justify-content: flex-end; }
 
@@ -209,10 +233,8 @@
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
             .hero { height: 80vh; padding-top: 60px; } 
-            
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             #timeline { padding: 0 1rem 4rem 1rem; }
-            
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
@@ -221,8 +243,12 @@
             /* Center alignment for mobile */
             .timeline-line { left: 50%; transform: translateX(-50%); }
             .stage-marker { left: 50%; transform: translateX(-50%); }
+            
             /* Ensure line connects on mobile too */
-            .timeline-line { top: -80px; } 
+            .timeline-line { top: 110px; } 
+            
+            .timeline-stage { justify-content: inherit; margin-left: 0; }
+            .stage-content { width: calc(50% - 30px); margin: 0; }
         }
     </style>
 </head>
@@ -251,7 +277,12 @@
 </section>
 
 <section id="timeline">
+    <div class="timeline-header">
+        <img src="ulogo.png" alt="timeline start logo">
+    </div>
+
     <div class="timeline-line"></div>
+    
     <div class="timeline-stage" id="stage1"><div class="stage-content"><div class="stage-title">Stage 01</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 02</div></div><div class="stage-marker"></div></div>
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">Stage 03</div></div><div class="stage-marker"></div></div>
