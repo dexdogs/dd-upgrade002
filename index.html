@@ -103,6 +103,11 @@
             margin: 0 auto;
             z-index: 2;
         }
+
+        /* NEW RULE: Offset for the logo header jump */
+        #timeline-start {
+            scroll-margin-top: 150px;
+        }
         
         #stage1 { 
             scroll-margin-top: 150px; 
@@ -268,12 +273,12 @@
     <canvas id="globe-canvas"></canvas>
     <div class="hero-content">
         <h1>your environmental<br>index watchdogs.</h1>
-        <a href="#stage1" class="btn">who cares?</a>
+        <a href="#timeline-start" class="btn">who cares?</a>
     </div>
 </section>
 
 <section id="timeline">
-    <div class="timeline-header">
+    <div class="timeline-header" id="timeline-start">
         <img src="ulogo.png" alt="timeline start logo">
     </div>
     
