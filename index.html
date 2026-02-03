@@ -75,7 +75,7 @@
         /* Hero Section */
         .hero { 
             position: relative; 
-            height: 100svh; /* Keeps globe stable on scroll */
+            height: 100svh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
@@ -228,8 +228,9 @@
             .hero { 
                 height: 70svh; 
                 min-height: 500px; 
-                /* Padding removed to ensure perfect vertical centering */
-                padding-top: 0; 
+                /* Padding-bottom lifts the text visually (Optical Centering) */
+                padding-bottom: 50px; 
+                padding-top: 0;
             } 
             
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
@@ -326,8 +327,9 @@
     let width, height, particles = [];
     const isMobile = window.innerWidth < 768;
     
-    // UPDATED: Radius reduced to 135 to prevent bottom cutoff on mobile
-    const globeRadius = isMobile ? 135 : 260; 
+    // UPDATED: Dynamic radius based on 30% of the smallest screen dimension.
+    // This ensures it fits whether the phone is tall (portrait) or wide (landscape).
+    let globeRadius = isMobile ? Math.min(window.innerWidth, window.innerHeight) * 0.30 : 260; 
     
     const particleCount = isMobile ? 350 : 750; 
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
@@ -342,22 +344,32 @@
 
         const dpr = window.devicePixelRatio || 1;
         width = window.innerWidth; height = window.innerHeight;
+        
+        // Recalculate radius on resize (rotations) to keep it safe
+        if(isMobile) {
+            globeRadius = Math.min(width, height) * 0.30;
+        }
+
         canvas.width = width * dpr; canvas.height = height * dpr;
         canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
+        
+        // Re-initialize particles if needed to match new radius (optional, but cleaner)
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            const phi = Math.acos(-1 + (2 * i) / particleCount);
+            const theta = Math.sqrt(particleCount * Math.PI) * phi;
+            particles.push({
+                xBase: globeRadius * Math.cos(theta) * Math.sin(phi),
+                yBase: globeRadius * Math.sin(theta) * Math.sin(phi),
+                zBase: globeRadius * Math.cos(phi),
+                char: symbols[Math.floor(Math.random() * symbols.length)]
+            });
+        }
     }
-    window.addEventListener('resize', resize); resize();
-
-    for (let i = 0; i < particleCount; i++) {
-        const phi = Math.acos(-1 + (2 * i) / particleCount);
-        const theta = Math.sqrt(particleCount * Math.PI) * phi;
-        particles.push({
-            xBase: globeRadius * Math.cos(theta) * Math.sin(phi),
-            yBase: globeRadius * Math.sin(theta) * Math.sin(phi),
-            zBase: globeRadius * Math.cos(phi),
-            char: symbols[Math.floor(Math.random() * symbols.length)]
-        });
-    }
+    window.addEventListener('resize', resize); 
+    // Run initial resize
+    resize();
 
     function handleStart(x, y) { isDragging = true; lastMouse = { x, y }; }
     function handleMove(x, y) {
